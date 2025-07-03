@@ -5,9 +5,9 @@ on:
       - main
       - dev
 env:                # One way to declare env variable, this can be job specific as well
-  MONGODB_CLUSTER_ADDRESS: gh-env-secrets.rla2fx2.mongodb.net # Name of the DB does not change
-  MONGODB_USERNAME: farheenjamadar158
-  MONGODB_PASSWORD: HjvLehh3hzGn4Lvl
+  MONGODB_CLUSTER_ADDRESS: ${{ secrets.MONGODB_CLUSTER_ADDRESS }}
+  MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+  MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
   PORT: 8080
 jobs:
   test:
@@ -31,12 +31,11 @@ jobs:
         run: npm test
       - name: Output information
         run: |    # Multiple syntax
-          echo "MONGODB_CLUSTER_ADDRESS: ${{ env.MONGODB_CLUSTER_ADDRESS }}" 
-          echo "MONGODB_CLUSTER_ADDRESS: $MONGODB_CLUSTER_ADDRESS"
+          echo "MONGODB_CLUSTER_ADDRESS: ${{ env.MONGODB_CLUSTER_ADDRESS }}"
   deploy:
     needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Output information
         run: |        
-          echo "..."
+          echo "MONGODB_USERNAME: $MONGODB_USERNAME"
