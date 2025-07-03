@@ -6,14 +6,15 @@ on:
       - dev
 env:                # One way to declare env variable, this can be job specific as well
   MONGODB_CLUSTER_ADDRESS: ${{ secrets.MONGODB_CLUSTER_ADDRESS }}
-  MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
-  MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+  #MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+  #MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
   PORT: 8080
 jobs:
   test:
-    #env:
-      #MONGODB_DB_NAME:       # This is job specific
     environment: testing
+    env:
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
